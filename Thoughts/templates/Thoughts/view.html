@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <h2>{{thought.head}}</h2>
+
+      <p>{{thought.uname}}</p>
+      <p>{{thought.thought}}</p>
+      <p>{{thought.thought_on}}</p>
+    </div>
+    <div>
+      {% for relate in thought.relates.all %}
+      <p>{{relate.relating}}</p>
+      <p>{{relate.related_by_name}}</p>
+      {% endfor %}
+
+      <form class="relate_form" method="post" id="RelateForm">
+        {% csrf_token %} {{ relate_form.as_p }}
+        <button type="submit" class="save btn btn-default">Think</button>
+      </form>
+
+      <form class="like_form" method="post" id="LikeForm">
+        {% csrf_token %}
+        <button type="submit" class="save btn btn-default">Like</button>
+      </form>
+    </div>
+  </body>
+</html>

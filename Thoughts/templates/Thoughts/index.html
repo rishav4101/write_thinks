@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    {% for thought in thoughts %}
+    <div>
+        <!--h2>{{forloop.counter}}</h2-->
+        <a href="{% url 'view_thought' thought.id %}">
+            <h2>{{ thought.head }}</h2>
+        </a>
+
+        <p>{{ thought.thought }}</p>
+        <p>{{ thought.uname }}</p>
+        <p>{{ thought.thought_on }}</p>
+
+
+
+
+
+
+
+
+    </div>
+    {% endfor %}
+</body>
+
+</html>
