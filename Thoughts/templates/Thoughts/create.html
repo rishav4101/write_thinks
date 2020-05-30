@@ -1,16 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "Thoughts/base.html" %} {% block content %}
+<div style="margin: 100px auto; margin-bottom: 70px; text-align: center;">
+  <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
+    <div class="neomorphic-line"></div>
+  </div>
+  <div class="relate-head engrave">
+    <h2><strong>Whats on your mind now ?</strong></h2>
+  </div>
+  <form class="thought_form" method="post" id="ThoughtForm">
+    {% csrf_token %}
+    <div class="card" style="margin: 35px auto;">
+      <div class="thought add-thot" style=" padding-top: 20px;
+      padding-bottom: 10px;">
+          <h4>Heading :</h4>
+        <input id="thot-head"
+        type="text"
+        name="head"
+        placeholder="How did you relate to this thought ?"></input>
+      </br>
+      <h4>Thought :</h4>
+        <textarea
+            id="thot"
+            type="text"
+            name="thought"
+            placeholder="How did you relate to this thought ?"
+          ></textarea>
+      </div>
+    </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <form class="thought_form" method="post" id="ThoughtForm">
-        {% csrf_token %}
-        {{ thought_form.as_p }}
-        <button type="submit" class="save btn btn-default">Think</button>
-    </form>
-</body>
+    <button type="submit" class="save relate-btn">POST</button>
+  </form>
+  <div style="padding-left: 50px; padding-right: 50px; padding-top: 20px;">
+    <div class="neomorphic-line"></div>
+  </div>
+</div>
+{%endblock%}

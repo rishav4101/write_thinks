@@ -1,34 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <h2>{{user.username}}</h2>
-    <h3>{{user.email}}</h3>
-    <h3>{{user.about}}</h3>
+{% extends "Thoughts/base.html" %} {% block content %}
+<div style="margin: 90px auto; margin-bottom: 60px; text-align: center;">
+  <div class="relate profile">
+    <div class="emboss"><h2>{{user.username}}</h2></div>
     <br />
-
+    <h3>Email : {{user.email}}</h3>
+    <h3>About : {{user.about}}</h3>
+  </div>
+  <br />
+  <div class="view-card" style="margin: 0 auto;">
     <form class="about_form" method="post" id="AboutForm">
-        {% csrf_token %}
-        {{ about_form.as_p }}
-        <button type="submit" class="save btn btn-default">Update</button>
+      {% csrf_token %}
+      <div class="emboss"><h4>Update your bio :</h4></div>
+      <textarea
+        id="Bio-update"
+        type="text"
+        name="about_field"
+        placeholder="Want to add something new ?"
+      ></textarea>
+      <button type="submit" class="save bio-btn">Update</button>
     </form>
-
-    <br />
+  </div>
+  <br />
+  <div
+    style="
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-bottom: 20px;
+      padding-top: 5px;
+    "
+  >
+    <div class="neomorphic-line"></div>
+  </div>
+  <div class="relate-head engrave">
+    <h3><strong>Your Thoughts :</strong></h3>
+  </div>
+  <div class="pprofile-posts" style="height: 100%; bottom: 0;">
     {% for thought in thoughts %}
-    <div>
-        <a href="{% url 'view_thought' thought.id %}">
+    <div class="p-post">
+      <div style="padding: 10px 10px 10px 10px;">
+        <a
+          href="{% url 'view_thought' thought.id %}"
+          style="cursor: default; text-decoration: none;"
+        >
+          <div class="p-post-card neumorphic-shadows-raised">
             <h2>{{thought.head}}</h2>
-        </a>
 
-        <p>{{thought.thought}}</p>
-        <p>{{thought.uname}}</p>
-        <p>{{thought.thought_on}}</p>
+            <p style="font-size: 12px;">{{thought.thought_on}}</p>
+          </div>
+        </a>
+      </div>
     </div>
     {% endfor %}
-</body>
+  </div>
+  <div style="padding-left: 50px; padding-right: 50px;">
+    <div class="neomorphic-line"></div>
+  </div>
+</div>
+
+{%endblock%}

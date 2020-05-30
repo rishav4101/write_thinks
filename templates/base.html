@@ -1,19 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href='{% static "auth.css" %}' />
     <title>{% block head_title %}{% endblock %}</title>
-    {% block extra_head %}
-    {% endblock %}
+    {% block extra_head %} {% endblock %}
   </head>
   <body>
-    {% block body %}
-
-    {% if messages %}
+    {% block body %} {% if messages %}
     <div>
       <strong>Messages:</strong>
       <ul>
         {% for message in messages %}
-        <li>{{message}}</li>
+        <h4>{{message}}</h4>
         {% endfor %}
       </ul>
     </div>
@@ -31,10 +30,7 @@
         {% endif %}
       </ul>
     </div>
-    {% block content %}
-    {% endblock %}
-    {% endblock %}
-    {% block extra_body %}
-    {% endblock %}
+    {% block content %} {% endblock %} {% endblock %} {% block extra_body %} {%
+    endblock %} {% endblock %}
   </body>
 </html>

@@ -1,35 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "Thoughts/base.html" %} {% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<div class="posts">
+  {% for thought in thoughts %}
 
-</head>
-
-<body>
-
-    {% for thought in thoughts %}
-    <div>
+  <div class="card">
+    <a
+      style="cursor: default; text-decoration: none;"
+      href="{% url 'view_thought' thought.id %}"
+    >
+      <div style="margin: 0 auto; text-align: center;">
         <!--h2>{{forloop.counter}}</h2-->
-        <a href="{% url 'view_thought' thought.id %}">
-            <h2>{{ thought.head }}</h2>
-        </a>
 
-        <p>{{ thought.thought }}</p>
-        <p>{{ thought.uname }}</p>
-        <p>{{ thought.thought_on }}</p>
+        <div class="thought">
+          <b><h3 class="engrave">{{ thought.head }}</h3></b>
+          <p style="font-family: 'Caveat', cursive; font-size: 17px;">
+            {{ thought.thought }}
+          </p>
 
+          <div class="stamp">
+            <p>Thought by : {{ thought.uname }}</p>
+            <p style="font-size: 10px;">{{ thought.thought_on }}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
 
+  {% endfor %}
+</div>
 
-
-
-
-
-
-    </div>
-    {% endfor %}
-</body>
-
-</html>
+{%endblock%}

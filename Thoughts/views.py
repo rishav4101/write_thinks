@@ -140,10 +140,10 @@ def profile(request):
             user.about = about_form.cleaned_data['about_field']
             user.save()
             about_form = AboutForm()
-            return HttpResponsePermanentRedirect('')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             about_form = AboutForm()
-            return HttpResponsePermanentRedirect('')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return render(request, 'Thoughts/profile.html', {'user': user, 'thoughts': thoughts, 'about_form': about_form})
 
 

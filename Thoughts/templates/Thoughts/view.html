@@ -1,34 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
+{% extends "Thoughts/base.html" %} {% block content %}
+<div style="margin-bottom: 70px;">
+  <div class="view-card">
+    <h2>{{thought.head}}</h2>
 
-  <body>
-    <div>
-      <h2>{{thought.head}}</h2>
+    <h4>Thinker : {{thought.uname}}</h4>
+    <p style="font-family: 'Caveat', cursive; font-size: 21px;">
+      {{thought.thought}}
+    </p>
+    <p style="font-size: 12px;">{{thought.thought_on}}</p>
+  </div>
+  <div>
+    <form class="like_form" method="post" id="LikeForm">
+      {% csrf_token %}
+      <button type="submit" class="like-btn save">
+        <h5>I like this thought!</h5>
+      </button>
+    </form>
 
-      <p>{{thought.uname}}</p>
-      <p>{{thought.thought}}</p>
-      <p>{{thought.thought_on}}</p>
-    </div>
-    <div>
-      {% for relate in thought.relates.all %}
-      <p>{{relate.relating}}</p>
-      <p>{{relate.related_by_name}}</p>
-      {% endfor %}
-
+    <div class="view-card" style="margin-top: 20px;">
+      <div class="relate-head engrave">
+        <h3><strong>Mention How did you relate :</strong></h3>
+      </div>
       <form class="relate_form" method="post" id="RelateForm">
-        {% csrf_token %} {{ relate_form.as_p }}
-        <button type="submit" class="save btn btn-default">Think</button>
-      </form>
-
-      <form class="like_form" method="post" id="LikeForm">
         {% csrf_token %}
-        <button type="submit" class="save btn btn-default">Like</button>
+        <div style="margin: 0 auto; text-align: center;">
+          <textarea
+            id="relating-input"
+            type="text"
+            name="relating"
+            placeholder="How did you relate to this thought ?"
+          ></textarea>
+        </div>
+        <button type="submit" class="save relate-btn">Share</button>
       </form>
     </div>
-  </body>
-</html>
+
+    <div>
+      <div class="relate-head engrave">
+        <h3><strong>People who related and shared their thoughts :</strong></h3>
+      </div>
+      {% for relate in thought.relates.all %}
+      <div class="relate">
+        <p>{{relate.relating}}</p>
+        <h5>Related By : {{relate.related_by_name}}</h5>
+      </div>
+      {% endfor %}
+      <div style="padding-left: 50px; padding-right: 50px;">
+        <div class="neomorphic-line"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
